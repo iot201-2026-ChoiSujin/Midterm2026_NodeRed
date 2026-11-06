@@ -1,0 +1,456 @@
+[
+    {
+        "id": "9098d361afad6c36",
+        "type": "tab",
+        "label": "플로우 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "740bec8b32b67d21",
+        "type": "tab",
+        "label": "플로우 10",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "6183fd8ced9f4855",
+        "type": "io7-hub",
+        "name": "",
+        "host": "mqtt",
+        "useTLS": false,
+        "knownPort": true,
+        "port": "1883",
+        "tls": "",
+        "clientid": ""
+    },
+    {
+        "id": "7197f335b5b36e69",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "2d63decc1efdfb8f",
+        "type": "ui-group",
+        "name": "Group 1",
+        "page": "e36fce995a1b2574",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": true,
+        "disabled": false,
+        "groupType": "default"
+    },
+    {
+        "id": "e36fce995a1b2574",
+        "type": "ui-page",
+        "name": "Page 1",
+        "ui": "fbeb2f2a576d1941",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "7197f335b5b36e69",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": 0,
+                "cols": 3
+            },
+            {
+                "name": "Tablet",
+                "px": 576,
+                "cols": 6
+            },
+            {
+                "name": "Small Desktop",
+                "px": 768,
+                "cols": 9
+            },
+            {
+                "name": "Desktop",
+                "px": 1024,
+                "cols": 12
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "fbeb2f2a576d1941",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "f23020218c286f6a",
+        "type": "io7 in",
+        "z": "740bec8b32b67d21",
+        "name": "valve1",
+        "deviceId": "valve1",
+        "authentication": "6183fd8ced9f4855",
+        "evt": "status",
+        "fmt": "json",
+        "qos": "0",
+        "allDevices": false,
+        "allEvents": false,
+        "allFormats": false,
+        "x": 230,
+        "y": 160,
+        "wires": [
+            [
+                "4613eebdabfde86d"
+            ]
+        ]
+    },
+    {
+        "id": "580e94cf6b709d6e",
+        "type": "io7 in",
+        "z": "740bec8b32b67d21",
+        "name": "thermometer1",
+        "deviceId": "thermometer1",
+        "authentication": "6183fd8ced9f4855",
+        "evt": "status",
+        "fmt": "json",
+        "qos": "0",
+        "allDevices": false,
+        "allEvents": false,
+        "allFormats": false,
+        "x": 250,
+        "y": 240,
+        "wires": [
+            [
+                "9cb7faf923a2856e"
+            ]
+        ]
+    },
+    {
+        "id": "d295013cc634df85",
+        "type": "io7 out",
+        "z": "740bec8b32b67d21",
+        "authentication": "6183fd8ced9f4855",
+        "name": "",
+        "deviceId": "valve1",
+        "cmd": "power",
+        "fmt": "json",
+        "qos": "0",
+        "retain": "false",
+        "x": 950,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "1af0d1964168cfb7",
+        "type": "io7 out",
+        "z": "740bec8b32b67d21",
+        "authentication": "6183fd8ced9f4855",
+        "name": "thermostat1",
+        "deviceId": "thermostat1",
+        "cmd": "set",
+        "fmt": "json",
+        "qos": "0",
+        "retain": "false",
+        "x": 970,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "4613eebdabfde86d",
+        "type": "function",
+        "z": "740bec8b32b67d21",
+        "name": "update ui",
+        "func": "msg.payload = msg.payload.d.valve;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 160,
+        "wires": [
+            [
+                "f1a55ce644260aaa"
+            ]
+        ]
+    },
+    {
+        "id": "9cb7faf923a2856e",
+        "type": "function",
+        "z": "740bec8b32b67d21",
+        "name": "update ui 2",
+        "func": "let temperature = {\n    payload: msg.payload.d.temperature,\n    topic: 'temperature'\n}\nreturn temperature;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 240,
+        "wires": [
+            [
+                "aab622e94ffb408f",
+                "5b33f6a531f5f49e"
+            ]
+        ]
+    },
+    {
+        "id": "5b33f6a531f5f49e",
+        "type": "function",
+        "z": "740bec8b32b67d21",
+        "name": "automate",
+        "func": "flow.set(msg.topic, msg.payload);\n\nlet evt1 = { d: {} };\n\nif (flow.get('target') > flow.get('temperature')) {\n    evt1.d.valve = 'on';\n} else {\n    evt1.d.valve = 'off';\n}\nreturn { payload: evt1 };",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 300,
+        "wires": [
+            [
+                "d295013cc634df85"
+            ]
+        ]
+    },
+    {
+        "id": "ff6c40c461bd1435",
+        "type": "function",
+        "z": "740bec8b32b67d21",
+        "name": "command 1",
+        "func": "msg.payload = {\n    \"d\": {\n        \"valve\": msg.payload\n    }\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 160,
+        "wires": [
+            [
+                "d295013cc634df85"
+            ]
+        ]
+    },
+    {
+        "id": "823dc1a663d9ce7e",
+        "type": "function",
+        "z": "740bec8b32b67d21",
+        "name": "command 2",
+        "func": "msg.payload = {\n    \"d\": {\n        \"target\": msg.payload\n    }\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 380,
+        "wires": [
+            [
+                "1af0d1964168cfb7"
+            ]
+        ]
+    },
+    {
+        "id": "d3c4fd6151a80755",
+        "type": "ui-slider",
+        "z": "740bec8b32b67d21",
+        "group": "2d63decc1efdfb8f",
+        "name": "Target °C",
+        "label": "설정온도",
+        "tooltip": "",
+        "order": 0,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "thumbLabel": "true",
+        "showTicks": "always",
+        "min": "10",
+        "max": "60",
+        "step": 1,
+        "className": "",
+        "iconPrepend": "",
+        "iconAppend": "",
+        "color": "",
+        "colorTrack": "",
+        "colorThumb": "",
+        "showTextField": false,
+        "x": 640,
+        "y": 380,
+        "wires": [
+            [
+                "823dc1a663d9ce7e"
+            ]
+        ]
+    },
+    {
+        "id": "aab622e94ffb408f",
+        "type": "ui-gauge",
+        "z": "740bec8b32b67d21",
+        "name": "gauge",
+        "group": "2d63decc1efdfb8f",
+        "order": 0,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "2",
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "현재온도",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "℃",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "22",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "32",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "50",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 630,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f1a55ce644260aaa",
+        "type": "ui-switch",
+        "z": "740bec8b32b67d21",
+        "name": "valve",
+        "label": "밸브",
+        "group": "2d63decc1efdfb8f",
+        "order": 0,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "decouple": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "className": "",
+        "layout": "row-spread",
+        "clickableArea": "switch",
+        "onvalue": "on",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "off",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "x": 630,
+        "y": 160,
+        "wires": [
+            [
+                "ff6c40c461bd1435"
+            ]
+        ]
+    },
+    {
+        "id": "eaf69215221bb6dc",
+        "type": "io7 in",
+        "z": "740bec8b32b67d21",
+        "name": "",
+        "deviceId": "rotary1",
+        "authentication": "6183fd8ced9f4855",
+        "evt": "status",
+        "fmt": "json",
+        "qos": "0",
+        "allDevices": false,
+        "allEvents": false,
+        "allFormats": false,
+        "x": 230,
+        "y": 380,
+        "wires": [
+            [
+                "ecc178404a99255b"
+            ]
+        ]
+    },
+    {
+        "id": "ecc178404a99255b",
+        "type": "function",
+        "z": "740bec8b32b67d21",
+        "name": "update ui 3",
+        "func": "let target = {\n    payload: msg.payload.d.target,\n    topic: 'target'\n}\nreturn target;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 380,
+        "wires": [
+            [
+                "d3c4fd6151a80755",
+                "5b33f6a531f5f49e"
+            ]
+        ]
+    }
+]
